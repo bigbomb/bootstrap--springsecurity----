@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd   
+    http://www.springframework.org/schema/context   
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd  
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+    http://www.springframework.org/schema/task 
+    http://www.springframework.org/schema/task/spring-task-3.0.xsd     
+    http://www.springframework.org/schema/aop 
+     http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+	<!-- 定时器开关 开始 -->
+	<task:annotation-driven />
+	<!-- 定时器开关 结束 -->
+	<!-- 标注类型 的事务配置 -->
+	<tx:annotation-driven />
+	<!-- 读取资源文件 -->
+	
+	
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:jdbc.properties" />
+	</bean>
+
+	
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+		destroy-method="close">
+		<property name="url" value="${url}" />
+		<property name="username" value="${username}" />
+		<property name="password" value="${password}" />
+		<property name="driverClassName" value="${driverClassName}" />
+		<!-- 属性类型是字符串，通过别名的方式配置扩展插件，
+		常用的插件有：
+		监控统计用的filter:stat 
+		日志用的filter:log4j
+		 防御sql注入的filter:wall -->
+		<property name="filters" value="${filters}" />
+		<!-- 最大连接池数量 -->
+		<property name="maxActive" value="${maxActive}" />
+		<property name="initialSize" value="${initialSize}" />
+		<property name="maxWait" value="${maxWait}" />
+		<property name="minIdle" value="${minIdle}" />
+		<!-- 有两个含义：
+			1) Destroy线程会检测连接的间隔时间
+ 			2) testWhileIdle的判断依据，详细看testWhileIdle属性的说明 -->
+		<property name="timeBetweenEvictionRunsMillis" value="${timeBetweenEvictionRunsMillis}" />
+		<property name="minEvictableIdleTimeMillis" value="${minEvictableIdleTimeMillis}" />
+
+		<property name="validationQuery" value="${validationQuery}" />
+		<!-- 建议配置为true，不影响性能，并且保证安全性。
+			申请连接的时候检测，如果空闲时间大于
+			timeBetweenEvictionRunsMillis，
+			执行validationQuery检测连接是否有效。 -->
+		<property name="testWhileIdle" value="${testWhileIdle}" />
+		<!-- 申请连接时执行validationQuery检测连接是否有效，
+			做了这个配置会降低性能。 -->
+		<property name="testOnBorrow" value="${testOnBorrow}" />
+		<!-- 
+		归还连接时执行validationQuery检测连接是否有效，
+		做了这个配置会降低性能
+		 -->
+		<property name="testOnReturn" value="${testOnReturn}" />
+		<!-- 
+		要启用PSCache，必须配置大于0，当大于0时，
+		poolPreparedStatements自动触发修改为true。
+		在Druid中，不会存在Oracle下PSCache占用内存过多的问题，
+		可以把这个数值配置大一些，比如说100
+		 -->
+		
+		<property name="maxOpenPreparedStatements"
+			value="${maxOpenPreparedStatements}" />
+		<!-- 对于长时间不使用的连接强制关闭 -->
+		<property name="removeAbandoned" value="${removeAbandoned}" /> <!-- 打开removeAbandoned功能 -->
+	   <!-- 超过30分钟开始关闭空闲连接 -->
+	    <property name="removeAbandonedTimeout" value="${removeAbandonedTimeout}" /> <!-- 1800秒，也就是30分钟 -->
+	   <!-- 将当前关闭动作记录到日志 -->
+	    <property name="logAbandoned" value="${logAbandoned}" /> <!-- 关闭abanded连接时输出错误日志 -->
+	</bean>
+	
+	<bean id="pagePlugin" class="com.lanyuan.pulgin.mybatis.plugin.PagePlugin">
+		<property name="properties">
+			<props>
+				<prop key="dialect">com.lanyuan.pulgin.jdbc.dialet.MySQLDialect</prop>
+				<prop key="pageSqlId">.*query.*</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:mybatis.xml" />
+		<property name="plugins">
+			<array>
+				<ref bean="pagePlugin" />
+			</array>
+		</property>
+		<property name="mapperLocations">
+			<list>
+				<!-- 自动匹配Mapper映射文件 -->
+				<value>classpath:mappings/*-mapper.xml</value>
+			</list>
+		</property>
+	</bean>
+	<!-- 通过扫描的模式，扫描目录在com.lanyuan.mapper目录下，所有的mapper都继承SqlMapper接口的接口， 这样一个bean就可以了 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.lanyuan.mapper" />
+	</bean>
+	<!-- 事务配置 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<aop:config>
+		<aop:pointcut
+			expression="execution(public * com.lanyuan.service.impl.*Impl.*(..))"
+			id="pointcut" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="pointcut" />
+	</aop:config>
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="query*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="find*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="modify*" propagation="REQUIRED" />
+			<tx:method name="logicDelById" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+
+	
+
+	 <bean id="log4jHandlerAOP" class="com.lanyuan.logAop.LogAopAction"></bean> 
+		<aop:config proxy-target-class="true">
+		    <aop:aspect id="logAspect" ref="log4jHandlerAOP"> 
+		    <aop:pointcut id="logPointCut" expression="execution(* com.lanyuan.service.impl.*.* (..))" /> 
+		    <aop:around method="logAll" pointcut-ref="logPointCut" /> </aop:aspect> 
+		</aop:config>
+
+	<!-- 使用Spring组件扫描的方式来实现自动注入bean -->
+	<context:component-scan base-package="com.lanyuan.service" />
+	<!-- <context:component-scan base-package="com.lanyuan.log"/> -->
+	<context:component-scan base-package="com.lanyuan.security" />
+	<!-- 隐式地向 Spring 容器注册 -->
+	<context:annotation-config />
+</beans>

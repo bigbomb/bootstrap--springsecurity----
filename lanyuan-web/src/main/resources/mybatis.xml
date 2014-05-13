@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<!-- 给实体Bean一个别名 -->
+		<typeAlias type="com.lanyuan.entity.Account" alias="Account" />
+		<typeAlias type="com.lanyuan.entity.Resources" alias="Resources" />
+		<typeAlias type="com.lanyuan.entity.Roles" alias="Roles" />
+		<typeAlias type="com.lanyuan.entity.Log" alias="Log" />
+		<typeAlias type="com.lanyuan.entity.ServerInfo" alias="ServerInfo" />
+		<typeAlias type="com.lanyuan.entity.Dic" alias="Dic" />
+		<typeAlias type="com.lanyuan.entity.DicType" alias="DicType" />
+		<typeAlias type="com.lanyuan.entity.ResourcesRole" alias="ResourcesRole" />
+		<typeAlias type="com.lanyuan.entity.RoleAccount" alias="RoleAccount" />
+	</typeAliases>
+</configuration>

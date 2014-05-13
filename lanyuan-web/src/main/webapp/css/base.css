@@ -1,0 +1,476 @@
+@charset "utf-8";
+/* CSS Document */
+body{
+	background:url(../images/grass-bg.jpg);
+	background-position:top center;
+    font-family:Georgia, "Times New Roman", Times, serif;
+	font-size:14px;
+}
+
+
+input:not([type]), input[type="color"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="email"], input[type="month"], input[type="number"], input[type="password"], input[type="tel"], input[type="text"], input[type="time"], input[type="url"], input[type="week"] {
+padding: 1px 0px;
+}
+user agent stylesheet
+input, input[type="password"], input[type="search"], isindex {
+-webkit-appearance: textfield;
+padding: 1px;
+background-color: white;
+border: 2px inset;
+-webkit-rtl-ordering: logical;
+-webkit-user-select: text;
+cursor: auto;
+}
+user agent stylesheet
+input, textarea, keygen, select, button, isindex, datagrid {
+margin: 0em;
+font: -webkit-small-control;
+color: initial;
+letter-spacing: normal;
+word-spacing: normal;
+line-height: normal;
+text-transform: none;
+text-indent: 0px;
+text-shadow: none;
+display: inline-block;
+text-align: -webkit-auto;
+}
+*:focus {outline: none;}
+
+/***********************Framework*********************/
+.wrapper{
+	width:100%;
+	margin:0 auto;
+	height:auto;
+}
+
+.header{
+	background-image:url(../images/leaf_body.png);
+	width:100%;
+	 margin: 0 auto -27px;
+	height:40px;	
+}
+
+.body{
+	width:100%;
+	margin:0 auto;
+	height:650px;
+}
+
+.container{
+	width:980px;
+	height:auto;
+	margin:2% auto 0;
+	overflow:hidden;
+}
+
+.clear{
+	clear:both;
+}
+
+
+.woodBar {
+background-image: url(../images/woodboard1.png);
+width: 960px;
+height: 90px;
+margin: 40px auto 0;
+position:fixed;
+}
+
+
+.footer{
+	background-image: url(../images/woodboard1.png);
+	left:2%;
+	bottom:0;
+	width:960px;
+	margin:30px auto 0;
+	height:90px;
+	font-size:14px;
+}
+
+/***********************DIVS*********************/
+/*imgZoom*/
+.imgZoom{
+	position:fixed;
+	z-index:4;
+	padding:10px;
+	display:none;
+}
+
+.imgTop{
+}
+
+.imgBody{
+	background-color:#FFF;
+	padding:10px;	
+}
+
+.closeDiv{
+	float:right;
+	margin:-20px; 
+	cursor:pointer;
+}
+
+.closeDiv img{
+	width:40px;
+	height:40px;
+	z-index:5;
+}
+
+
+/*floatDIV*/
+#floatBoxBg{
+	width:100%;
+	height:100%;
+	background:#000;
+    opacity:0.6; /* 标准: Firefox 1.5 以上, Opera, Safari */
+	filter: alpha(opacity=60); /* IE 8 以下 */
+	-ms-filter: "alpha(opacity=60)"; /* IE 8 */
+	-moz-opacity:0.6; /* FF lt 1.5, Netscape */
+	position:fixed;
+	display:none;
+	top:0;
+	left:0;
+}
+
+.float {
+	position:absolute;
+	width:770px;
+	height: auto;
+	align: center;
+	-moz-border-radius: 16px;
+	-webkit-border-radius: 16px;
+	border-radius: 16px;
+	display:none;
+}
+
+.float .top {
+	background: url(../images/leaf_top.png) no-repeat right top;
+	height: 10px;
+	width: 100%;
+	font-size: 0;
+	margin-left: 10px;
+}
+
+.float .top .corner {
+	background: url(../images/leaf_top.png) no-repeat left top;
+	zoom: 1;
+	font-size: 0;
+	height: 10px;
+	width: 10px;
+	float: left;
+	margin-left: -10px;
+}
+
+.float .bottom {
+	background: url(../images/leaf_bottom.png) no-repeat left bottom;
+	height: 10px;
+	width: 100%;
+	margin-right: 10px;
+	font-size: 0;
+}
+
+.float .bottom .corner {
+	background: url(../images/leaf_bottom.png) no-repeat right bottom;
+	font-size: 0;
+	height: 10px;
+	width: 10px;
+	float: right;
+	margin-right: -10px;
+}
+
+.float .body {
+	background: transparent url(../images/leaf_body.png);
+	padding:10px 5px;
+	height: 400px;
+	width:100%;
+	height: 700px; 
+	word-break : break-all;
+	font-size: 14px;
+	word-break: break-all;
+}
+
+
+/*leaf DIV*/
+
+.leafSet{
+	width:2000px;
+	opacity:0.9; /* 标准: Firefox 1.5 以上, Opera, Safari */
+
+}
+
+.leaf.two{
+	display:none;
+}
+
+.leaf {
+	float:left;
+	width: 450px;
+	height: auto;
+	margin:20px;
+	align: center;
+	-moz-border-radius: 16px;
+	-webkit-border-radius: 16px;
+	border-radius: 16px;
+	
+}
+
+.leaf .top {
+	background: url(../images/leaf_top.png) no-repeat right top;
+	height: 10px;
+	width: 440px;
+	font-size: 0;
+	margin-left: 10px;
+}
+
+.leaf .top .corner {
+	background: url(../images/leaf_top.png) no-repeat left top;
+	zoom: 1;
+	font-size: 0;
+	height: 10px;
+	width: 10px;
+	float: left;
+	margin-left: -10px;
+}
+
+.leaf .bottom {
+	background: url(../images/leaf_bottom.png) no-repeat left bottom;
+	height: 10px;
+	width: 440px;
+	margin-right: 10px;
+	font-size: 0;
+}
+
+.leaf .bottom .corner {
+	background: url(../images/leaf_bottom.png) no-repeat right bottom;
+	font-size: 0;
+	height: 10px;
+	width: 10px;
+	float: right;
+	margin-right: -10px;
+}
+
+.leaf .body {
+	background: transparent url(../images/leaf_body.png);
+	padding:10px 5px;
+	height: 400px;
+	width: 440px;
+	height: 240px; 
+	word-break : break-all;
+	font-size: 14px;
+	word-break: break-all;
+}
+
+
+input.search{
+	background: white url(../images/bg-form-field.gif) repeat-x 0% 0%;
+	position:relative;
+	left:50px;
+	top:90px;
+	width:270px;
+	height:27px;
+	line-height:27px;
+	font-size:22px;
+	border:1px solid #D5D5D5;
+	color: #333;
+	padding: 4px;
+	letter-spacing:2px;
+	opacity:0.8; /* 标准: Firefox 1.5 以上, Opera, Safari */
+	filter: alpha(opacity=80); /* IE 8 以下 */
+	-ms-filter: "alpha(opacity=80)"; /* IE 8 */
+	-moz-opacity:0.8; /* FF lt 1.5, Netscape */
+}
+
+p.search {
+	background: url(../images/input-bg1.png);
+	width: 331px;
+	height: 56px;
+	margin:50px auto;
+	opacity:0.8; /* 标准: Firefox 1.5 以上, Opera, Safari */
+
+}
+
+input.text {
+background: none;
+border: none;
+width: 280px;
+height: 18px;
+font-family: 'ColabThin', monospace;
+font-size: 18px;
+color: #5E5E5E;
+margin-left: 20px;
+margin-top: 13px;
+}
+
+.flow-btn {
+right: inherit;
+left: 200px;
+bottom: -60px;
+}
+
+.flow-btn {
+position: absolute;
+left:130;
+top:0px;
+cursor: pointer;
+background: url(../images/flow-btn-bg.png) top no-repeat;
+width: 110px;
+padding-right: 15px;
+height: 71px;
+font-family:"幼圆";
+font-size: 24px;
+font-weight:bold;
+color: white;
+text-decoration: none;
+text-align: center;
+line-height: 53px;
+text-shadow: 1px 1px 1px #569B2E;
+}
+
+.flow-btn:hover {
+background-position: bottom;
+}
+
+/*************homeButton***********/
+.home{
+	position:relative;
+	width:128px;
+	height:128px;
+	margin:-7% auto;
+	cursor:pointer;
+	z-index:1;
+}
+
+.home img{
+	padding:10px 0;
+	width:128px;
+	height:128px;
+}
+
+/*************icons***********/
+.iconSet{
+	width:450px;
+	margin:0px auto;	
+}
+
+.icon{
+	float:left;
+	width:128px;
+	height:128px;
+	margin:5px;
+}
+
+.icon img{
+	width:108px;
+	height:108px;
+	margin:10px;
+}
+
+.icon img.hover{
+	width:128px;
+	height:128px;
+	margin:0px;
+	cursor:pointer;
+}
+
+
+/*************Mail***********/
+.stamp{
+	float:left;
+	margin:20px;
+}
+
+.tips{
+	float:left;
+	margin:30px auto;
+	color:#FFF;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:28px;
+	font-weight:bold;
+}
+
+.seal{
+	color:#FFF;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:110px;
+	font-weight:bold;
+	margin:10px;
+	opacity:0.3; /* 标准: Firefox 1.5 以上, Opera, Safari */
+	filter: alpha(opacity=30); /* IE 8 以下 */
+	-ms-filter: "alpha(opacity=30)"; /* IE 8 */
+	-moz-opacity:0.3; /* FF lt 1.5, Netscape */
+}
+
+/*************colors***********/
+
+.number{
+	text-align:center;
+	color:#FFF;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:80px;
+	font-weight:bold;
+	line-height:240px;
+}
+
+
+.orange{
+	color:#F39828;
+	font-size:48px;
+}
+
+.close{
+	float:right; 
+	margin:-15px; 
+	cursor:pointer;
+}
+
+.close img{
+	width:40px;
+	height:40px;
+}
+
+/*************weather***********/
+.weather{
+	margin:10px;
+	display:block;
+	font-size:32px;
+	color:#FFF;
+	font-family:"幼圆";
+}
+
+#sun{
+	float:left;
+}
+
+
+/*************photo***********/
+.photo{
+	margin:10px 60px;
+}
+
+.photo a img { 
+height: 220px; 
+width: 300px; 
+padding: 5px; 
+border: 1px solid #ccc; 
+background-color: #FFF; 
+}
+
+
+
+/*************audio***********/
+audio{
+	width:400px;
+	margin:40px auto 0;
+	display:block;
+}
+
+marquee{
+	display:block;
+	direction:ltr;
+	width:400px;
+	color:#FFF;
+	font-size:14px;
+	margin:0 auto;
+}
+
