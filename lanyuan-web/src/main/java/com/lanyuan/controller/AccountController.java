@@ -6,20 +6,30 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lanyuan.entity.Account;
+import com.lanyuan.entity.Dic;
 import com.lanyuan.entity.Resources;
 import com.lanyuan.pulgin.mybatis.plugin.PageView;
 import com.lanyuan.service.AccountService;
+import com.lanyuan.service.ResourcesService;
 import com.lanyuan.util.Common;
 import com.lanyuan.util.Md5Tool;
 import com.lanyuan.util.POIUtils;
+import com.lanyuan.util.PropertiesUtils;
 
 /**
  * 
@@ -33,9 +43,23 @@ import com.lanyuan.util.POIUtils;
 public class AccountController extends BaseController{
 	@Inject
 	private AccountService accountService;
+	@Inject
+	private ResourcesService resourcesService;
 	
 	@RequestMapping("list")
-	public String list(Model model, Resources menu, String pageNow) {
+	public String list(Model model, Resources resources,HttpServletRequest request) {
+		
+		List<Resources> rs;
+		if (PropertiesUtils.findPropertiesKey("rootName").equals(Common.findAuthenticatedUsername()))
+		{
+		    rs =resourcesService.queryAll(resources);
+		}
+		else
+		{
+			rs =resourcesService.findAccountResourcess(Common.findUserSessionId(request));
+		}
+		model.addAttribute("resourceslists", rs);
+		
 		return Common.BACKGROUND_PATH+"/account/list";
 	}
 	/**
@@ -213,5 +237,22 @@ public class AccountController extends BaseController{
 			map.put("flag", "false");
 		}
 		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value ="findAccount", method=RequestMethod.GET)
+	public JSONObject findDic(Model model, Account account,@RequestParam(value = "sEcho") int sEcho,  @RequestParam(value = "iDisplayStart") int start, 
+            @RequestParam(value = "iDisplayLength") int pageSize) {
+		account.setStart(start);
+		account.setEnd(pageSize);
+		List<Account> dicList =	accountService.queryAll(account);
+		long dicLIstCount = accountService.count(account);
+		JSONObject jsonObject = new JSONObject(); 
+        String aaData=JSONArray.fromObject(dicList).toString(); 
+        jsonObject.put("sEcho", sEcho);
+        jsonObject.put("iTotalRecords", String.valueOf(dicLIstCount));
+        jsonObject.put("iTotalDisplayRecords", String.valueOf(dicLIstCount));
+        jsonObject.put("aaData", aaData);
+        return jsonObject;
 	}
 }

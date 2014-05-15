@@ -123,4 +123,8 @@
 		<include refid="selectId" />
 		from account where accountName=#{accountName}
 	</select>
+	<select id="count" parameterType="Account" resultType="long">
+		select count(*) 
+		from account where 1=1
+	</select>
 </mapper>
