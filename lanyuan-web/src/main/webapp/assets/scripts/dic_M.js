@@ -1,4 +1,4 @@
-var UIExtendedModals = function () {
+var ModalsManager = function () {
 	var dicId;
 	//获取dic类型
 	var  getDicType = function(byId){

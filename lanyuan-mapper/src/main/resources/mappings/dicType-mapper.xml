@@ -90,4 +90,8 @@
 		update dic_type set deletestatus = 1
 		where id = #{id}
 	</update>
+		<select id="count" parameterType="DicType" resultType="long">
+		select count(*) 
+		from dic_type where 1=1
+	</select>
 </mapper>

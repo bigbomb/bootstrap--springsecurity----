@@ -7,7 +7,7 @@ package com.lanyuan.entity;
  * date：2014-4-8
  */
 @SuppressWarnings("serial")
-public class Dic implements java.io.Serializable{
+public class Dic extends Page implements java.io.Serializable{
 	
 	private Integer id;
 	private Integer dicTypeId;//类型ID
@@ -16,8 +16,6 @@ public class Dic implements java.io.Serializable{
 	private String dicTypeName;//类型名
 	private String dicTypeKey;//类型key
 	private String description;//说明
-	private Integer start;
-	private Integer end;
 	public Integer getId() {
 		return id;
 	}
@@ -60,16 +58,5 @@ public class Dic implements java.io.Serializable{
 	public void setDicTypeKey(String dicTypeKey) {
 		this.dicTypeKey = dicTypeKey;
 	}
-	public Integer getStart() {
-		return start;
-	}
-	public void setStart(Integer start) {
-		this.start = start;
-	}
-	public Integer getEnd() {
-		return end;
-	}
-	public void setEnd(Integer end) {
-		this.end = end;
-	}
+
 }

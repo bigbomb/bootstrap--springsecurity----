@@ -7,5 +7,5 @@ import com.lanyuan.entity.Dic;
 
 public interface DicService extends BaseService<Dic>{
 	public Dic isExist(Dic dic);
-	public long count(Dic dic);
+	
 }

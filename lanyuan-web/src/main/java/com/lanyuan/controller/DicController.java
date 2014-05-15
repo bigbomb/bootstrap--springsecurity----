@@ -219,7 +219,7 @@ public class DicController extends BaseController{
 	
 	@ResponseBody
 	@RequestMapping(value ="findDic", method=RequestMethod.GET)
-	public JSONObject findDicType(Model model, Dic dic,@RequestParam(value = "sEcho") int sEcho,  @RequestParam(value = "iDisplayStart") int start, 
+	public JSONObject findDic(Model model, Dic dic,@RequestParam(value = "sEcho") int sEcho,  @RequestParam(value = "iDisplayStart") int start, 
             @RequestParam(value = "iDisplayLength") int pageSize) {
 		dic.setStart(start);
 		dic.setEnd(pageSize);

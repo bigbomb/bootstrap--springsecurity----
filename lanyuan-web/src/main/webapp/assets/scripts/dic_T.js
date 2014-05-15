@@ -50,7 +50,7 @@ var TableManaged = function () {
             	                 {   
             	                	 "mData": "id",
                                      "mRender": function(data, type, full) { // 返回自定义内容
-                                    	 return '<a href="javascript:void(0)" id ="edit" class="btn default btn-xs purple"><i class="fa fa-edit"></i>修改</a>&nbsp;&nbsp;<a href="javascript:void(0)" id="del" class="btn default btn-xs black" onclick ="UIExtendedModals.dicDel(\'' + data + '\');"><i class="fa fa-trash-o"></i>删除</a>';                                    	
+                                    	 return '<a href="javascript:void(0)" id ="edit" class="btn default btn-xs purple"><i class="fa fa-edit"></i>修改</a>&nbsp;&nbsp;<a href="javascript:void(0)" id="del" class="btn default btn-xs black" onclick ="ModalsManager.dicDel(\'' + data + '\');"><i class="fa fa-trash-o"></i>删除</a>';                                    	
                                      }
                                  }
             	                 ],
@@ -119,7 +119,7 @@ var TableManaged = function () {
         	    var checked =$('#sample_1 tbody tr').find("input[type=checkbox]").is(":checked");
            	   if(checked)
            		{
-           		     UIExtendedModals.updateDicModal(); 
+           		ModalsManager.updateDicModal(); 
            		     $('#sample_1 tbody tr').find("input[type=checkbox]").attr("checked", false);
           		     $('#sample_1 tbody tr').find('span').removeClass('checked');
           		     $('#sample_1 tbody tr').removeClass('active'); 

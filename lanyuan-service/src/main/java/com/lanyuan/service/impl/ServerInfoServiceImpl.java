@@ -47,5 +47,8 @@ public class ServerInfoServiceImpl implements ServerInfoService{
 	public void update(ServerInfo serverInfo) throws Exception {
 		serverInfoMapper.update(serverInfo);
 	}
-	
+	public long count(ServerInfo serverInfo)
+	{
+		return 1;
+	}
 }

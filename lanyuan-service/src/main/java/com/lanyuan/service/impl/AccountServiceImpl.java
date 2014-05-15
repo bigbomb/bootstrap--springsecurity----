@@ -74,4 +74,8 @@ public class AccountServiceImpl implements AccountService {
 	public Account countAccount(Account account) {
 		return accountMapper.countAccount(account);
 	}
+	public long count(Account account)
+	{
+		return accountMapper.count(account);
+	}
 }

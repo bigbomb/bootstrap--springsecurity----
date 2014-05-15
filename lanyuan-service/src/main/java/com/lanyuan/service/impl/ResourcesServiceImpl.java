@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.lanyuan.entity.Log;
 import com.lanyuan.entity.Resources;
 import com.lanyuan.entity.ResourcesRole;
 import com.lanyuan.mapper.ResourcesMapper;
@@ -94,6 +95,10 @@ public class ResourcesServiceImpl implements ResourcesService {
 	
 	public Resources isExist(String resourcesName) {
 		return resourcesMapper.isExist(resourcesName);
+	}
+	
+	public long count(Resources resources) {
+		return resourcesMapper.count(resources);
 	}
 
 }

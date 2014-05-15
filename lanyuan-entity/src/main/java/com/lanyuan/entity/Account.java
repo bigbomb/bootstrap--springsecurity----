@@ -12,7 +12,7 @@ import com.lanyuan.util.JsonDateSerializer;
  * 账号实体表
  */
 @SuppressWarnings("serial")
-public class Account implements java.io.Serializable {
+public class Account extends Page implements java.io.Serializable {
 	
 	private int id;
 

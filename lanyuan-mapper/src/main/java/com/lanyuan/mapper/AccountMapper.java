@@ -20,6 +20,6 @@ public interface AccountMapper extends BaseMapper<Account>{
 	public Account countAccount(Account account);
 	
 	public List<Account> queryNoMatch(Map<String, Object> map);
-	
+	public long count(Account account);
 	
 }

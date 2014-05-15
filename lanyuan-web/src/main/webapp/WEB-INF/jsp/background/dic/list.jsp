@@ -772,15 +772,15 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 						<div class="portlet-body">
 							<div class="table-toolbar">
 								
-								<a class="btn green" onclick = "UIExtendedModals.addDicModal();" role="button">
+								<a class="btn green" onclick = "ModalsManager.addDicModal();" role="button">
 									添加 <i class="fa fa-plus"></i>
 									</a>
 									
-									<a class="btn yellow" role="button" onclick = "UIExtendedModals.updateDicModal();">
+									<a class="btn yellow" role="button" onclick = "ModalsManager.updateDicModal();">
 									修改 <i class="fa fa-edit"></i>
 									</a>
 									
-									<a  class="btn red" role="button"  onclick = "UIExtendedModals.batchDicDel();">
+									<a  class="btn red" role="button"  onclick = "ModalsManager.batchDicDel();">
 									删除 <i class="fa fa-minus"></i>
 									</a>
 								
@@ -872,7 +872,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									    	<label class="control-label visible-ie8 visible-ie9">名称</label>
 											<div class="input-icon">
 												<select class="form-control placeholder-no-fix"  name="dicName" id = "dicName">
-											             <option value="" title="">请选择名称</option>
+											             <option value="" title="">--请选择名称--</option>
 											             <option value='目录' >目录</option>
 							     						 <option value='菜单' >菜单</option>
 							    						 <option value='按钮' >按钮</option>
@@ -954,7 +954,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 								</div>
 								</form>
 			</div>
-			<div id="confirm" class="modal" tabindex="-1" data-keyboard="false"  >
+			<div id="confirm" class="modal" tabindex="-1" data-keyboard="false" data-width = "300" >
 								<div class="modal-body">
 									<p>
 										您确定继续操作么？
@@ -967,7 +967,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 			</div>
 			
 			
-				<div id="success" class="modal" tabindex="-1" data-keyboard="false"  width = "80">
+				<div id="success" class="modal" tabindex="-1" data-keyboard="false"  data-width = "300">
 								<div class="modal-body">
 									<p>
 										您的操作成功了！
@@ -977,7 +977,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									<button type="button" data-dismiss="modal" class="btn btn-default"  aria-hidden="true">关闭</button>
 								</div>
 			</div>
-			<div id="error" class="modal" tabindex="-1" data-keyboard="false"  width = "80">
+			<div id="error" class="modal" tabindex="-1" data-keyboard="false"  data-width = "300">
 								<div class="modal-body">
 									<p>
 										您的操作失败了！
@@ -987,7 +987,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									<button type="button" data-dismiss="modal" class="btn btn-default"  aria-hidden="true">关闭</button>
 								</div>
 			</div>
-			<div id="alert" class="modal" tabindex="-1" data-keyboard="false"  width = "80">
+			<div id="alert" class="modal" tabindex="-1" data-keyboard="false"  data-width = "300">
 								<div class="modal-body">
 									<p>
 										只能选择一条记录才可以操作！
@@ -1041,9 +1041,9 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <script src="${pageContext.request.contextPath}/assets/plugins/jquery-validation/dist/jquery.validate.min.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 <script src="${pageContext.request.contextPath}/assets/scripts/app.js"></script>
-<script src="${pageContext.request.contextPath}/assets/scripts/table-managed.js"></script>
+<script src="${pageContext.request.contextPath}/assets/scripts/dic_T.js"></script>
 <script src="${pageContext.request.contextPath}/assets/scripts/fnReloadAjax.js"></script>
-<script src="${pageContext.request.contextPath}/assets/scripts/ui-extended-modals.js"></script>
+<script src="${pageContext.request.contextPath}/assets/scripts/dic_M.js"></script>
 <script type="text/javascript">
       jQuery(document).ready(function() {         
          App.init();

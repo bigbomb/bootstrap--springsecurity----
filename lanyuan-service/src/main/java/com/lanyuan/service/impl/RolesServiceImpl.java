@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.lanyuan.entity.Resources;
 import com.lanyuan.entity.RoleAccount;
 import com.lanyuan.entity.Roles;
 import com.lanyuan.mapper.RolesMapper;
@@ -71,6 +72,9 @@ public class RolesServiceImpl implements RolesService {
 	public void addAccRole(RoleAccount roleAccount) {
 		roleMapper.deleteAccountRole(roleAccount.getAccountId().toString());
 		roleMapper.addAccRole(roleAccount);
+	}
+	public long count(Roles roles) {
+		return roleMapper.count(roles);
 	}
 
 }

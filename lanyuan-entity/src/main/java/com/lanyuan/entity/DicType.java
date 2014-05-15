@@ -7,7 +7,7 @@ package com.lanyuan.entity;
  * date：2014-4-8
  */
 @SuppressWarnings("serial")
-public class DicType implements java.io.Serializable{
+public class DicType extends Page implements java.io.Serializable{
 	
 	private Integer id;
 	private String dicTypeKey;//类型KEY

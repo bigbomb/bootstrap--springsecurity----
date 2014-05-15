@@ -12,4 +12,6 @@ public interface RolesMapper extends BaseMapper<Roles>{
 	public void addAccRole(RoleAccount roleAccount);
 	
 	public void deleteAccountRole(String accountId);
+	
+	public long count(Roles role);
 }

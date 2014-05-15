@@ -47,5 +47,7 @@ public class LogServiceImpl implements LogService {
 	public List<Log> queryAll(Log log) {
 		return logMapper.queryAll(log);
 	}
-
+	public long count(Log log) {
+		return logMapper.count(log);
+	}
 }

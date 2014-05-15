@@ -5,10 +5,16 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lanyuan.entity.Dic;
@@ -16,7 +22,9 @@ import com.lanyuan.entity.Resources;
 import com.lanyuan.entity.DicType;
 import com.lanyuan.pulgin.mybatis.plugin.PageView;
 import com.lanyuan.service.DicTypeService;
+import com.lanyuan.service.ResourcesService;
 import com.lanyuan.util.Common;
+import com.lanyuan.util.PropertiesUtils;
 
 /**
  * 
@@ -31,8 +39,24 @@ public class DicTypeController extends BaseController{
 	@Inject
 	private DicTypeService dicTypeService;
 	
+	@Inject
+	private ResourcesService resourcesService;
+	
+	
 	@RequestMapping("list")
-	public String list(Model model, Resources menu, String pageNow) {
+	public String list(Model model, Resources resources,HttpServletRequest request) {
+		
+		List<Resources> rs;
+		if (PropertiesUtils.findPropertiesKey("rootName").equals(Common.findAuthenticatedUsername()))
+		{
+		    rs =resourcesService.queryAll(resources);
+		}
+		else
+		{
+			rs =resourcesService.findAccountResourcess(Common.findUserSessionId(request));
+		}
+		model.addAttribute("resourceslists", rs);
+		
 		return Common.BACKGROUND_PATH+"/dicType/list";
 	}
 	/**
@@ -195,13 +219,27 @@ public class DicTypeController extends BaseController{
 		}
 		return map;
 	}
-	
 	@ResponseBody
 	@RequestMapping("findDicType")
 	public List<DicType> findDicType(Model model, DicType dicType) {
 		return dicTypeService.queryAll(dicType);
 	}
-	
+	@ResponseBody
+	@RequestMapping(value ="listDicType", method=RequestMethod.GET)
+	public JSONObject listDicType(Model model, DicType dicType,@RequestParam(value = "sEcho") int sEcho,  @RequestParam(value = "iDisplayStart") int start, 
+            @RequestParam(value = "iDisplayLength") int pageSize) {
+		dicType.setStart(start);
+		dicType.setEnd(pageSize);
+		List<DicType> dicList =	dicTypeService.queryAll(dicType);
+		long dicLIstCount = dicTypeService.count(dicType);
+		JSONObject jsonObject = new JSONObject(); 
+        String aaData=JSONArray.fromObject(dicList).toString(); 
+        jsonObject.put("sEcho", sEcho);
+        jsonObject.put("iTotalRecords", String.valueOf(dicLIstCount));
+        jsonObject.put("iTotalDisplayRecords", String.valueOf(dicLIstCount));
+        jsonObject.put("aaData", aaData);
+        return jsonObject;
+	}
 	@ResponseBody
 	@RequestMapping("findDicTypeDetail")
 	public Map<String, Object> findDicTypeDetail(Model model, DicType dicType) {

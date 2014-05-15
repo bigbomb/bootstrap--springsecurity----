@@ -20,4 +20,5 @@ public interface BaseService<T> extends Base<T> {
 	 * @return
 	 */
 	public PageView query(PageView pageView,T t);
+	public long count(T t);
 }

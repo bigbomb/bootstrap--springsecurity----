@@ -54,5 +54,8 @@ public class DicTypeServiceImpl implements DicTypeService {
 	public DicType isExist(DicType dicType) {
 		return dicTypeMapper.isExist(dicType);
 	}
-
+	public long count(DicType dicType)
+	{
+		return dicTypeMapper.count(dicType);
+	}
 }

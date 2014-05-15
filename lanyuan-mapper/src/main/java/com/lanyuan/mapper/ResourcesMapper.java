@@ -38,4 +38,5 @@ public interface ResourcesMapper extends BaseMapper<Resources> {
 	public void addRoleRes(ResourcesRole rr);
 
 	public void deleteResourcesRole(String roleId);
+	public long count(Resources resources);
 }
